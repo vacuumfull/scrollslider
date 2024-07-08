@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" href="./style.css" rel="stylesheet" >
+    </head>
+    <body>
+        <section class="reviewslider">
+            <div class="reviewshead">
+                <h3>Какой то заголовок</h3>
+            </div>
+            <div class="reviewscontent">
+                <div class="rev-carousel-wrap">
+                    <div class="rev-carousel" style="transform: translateZ(-311px) rotateY(-6120deg);">
+                        <div class="reviewcard active">
+                            <div class="reviewinner">
+                                <div class="reviewhead">
+                                      Иван Петрович
+                                </div>
+                                <div class="reviewcontent">
+                                     Я очень пиздатый разработчик и зп получаю  в валюте, а вы все нищеброды стремные.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="reviewcard next">
+                            <div class="reviewinner">
+                                <div class="reviewhead">
+                                    Сидор Петрович
+                                </div>
+                                <div class="reviewcontent">
+                                     Я очень пиздатый разработчик и зп получаю  в валюте, а вы все нищеброды стремные.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="reviewcard prev" >
+                            <div class="reviewinner">
+                                <div class="reviewhead">
+                                    Эраст Петрович
+                                </div>
+                                <div class="reviewcontent">
+                                     Я очень пиздатый разработчик и зп получаю  в валюте, а вы все нищеброды стремные.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="reviewcard last" >
+                            <div class="reviewinner">
+                                <div class="reviewhead">
+                                    Вальдемар Васильев
+                                </div>
+                                <div class="reviewcontent">
+                                     Я очень пиздатый разработчик и зп получаю  в валюте, а вы все нищеброды стремные.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+<script>
+    let reviews = document.querySelectorAll('.reviewcard'),
+        rotationMoveAngle = 90, 
+        initRotateY = 6030,
+        translateZ = 410,
+        classes  = ['active', 'next', 'prev', 'last'];
+
+    document.addEventListener("DOMContentLoaded", () => {
+        moveItems(initRotateY, rotationMoveAngle)
+    });
+
+    reviews.forEach((review) => {
+        review.addEventListener('wheel', (event) => {
+            if (event.deltaY < 0) {
+                console.log('move right')
+                initRotateY += rotationMoveAngle 
+                moveItems(initRotateY, rotationMoveAngle)
+                classes = setClasses(classes, true)
+            } else if (event.deltaY > 0) {
+                console.log('move left')
+                initRotateY -= rotationMoveAngle 
+                moveItems(initRotateY, rotationMoveAngle)
+                classes = setClasses(classes, false)
+            }
+            event.preventDefault();
+            event.stopPropagation();
+            return false;
+        }, true)
+    })
+
+    function moveItems(angle, moveAngle=120){
+        let reviewsCarousel = document.querySelector('.rev-carousel'),
+            reviewCards = document.querySelectorAll('.reviewcard'),
+            angleStroke = angle > 0 ? `-${angle}` : Math.abs(angle)
+
+        reviewsCarousel.style = `transform: translateZ(-311px) rotateY(${angleStroke}deg);`
+        reviewCards.forEach((review, idx) => {
+            let shiftAngle = idx * moveAngle,
+                setAngle = angle - shiftAngle,
+                style = `transform: rotateY(${shiftAngle}deg) translateZ(411px) rotateY(${setAngle}deg);`
+            reviewCards[idx].style = style
+        })
+    }
+    function setClasses(classes, right=true){
+        let reviewCards = document.querySelectorAll('.reviewcard');
+        reviewCards.forEach((review) => {
+            classes.forEach(className => {
+                review.classList.remove(className)
+            })
+        })
+        if (right) {
+            let last = classes.pop();
+            classes.unshift(last)
+        } else {
+            let first = classes[0]
+            classes.shift()
+            classes.push(first)
+        }
+        reviewCards.forEach((review, idx) => {
+            review.classList.add(classes[idx])
+        })
+        return classes
+    }
+</script>
+
+    </body>
+</html>
