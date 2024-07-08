@@ -51,12 +51,12 @@ body{
     pointer-events: none;
 }
 
-.reviewcard.next{
-    opacity: .7;
+.reviewcard.prev{
+    opacity: .8;
 }
 
 .reviewcard.next{
-    opacity: .5;
+    opacity: .65;
 }
 
 .reviewcard:nth-child(1){
