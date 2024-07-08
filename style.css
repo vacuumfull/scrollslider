@@ -1,0 +1,86 @@
+body{
+    margin: 0px;
+}
+
+.reviewslider{
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    background-color: antiquewhite;
+}
+.reviewshead{
+    position: relative;
+    padding: 25px 50px 0px 50px;
+}
+.reviewshead h3{
+    font-size: 35px;
+    text-transform: uppercase;
+}
+.reviewscontent{
+    width: 100%;
+    position: relative;
+}
+.rev-carousel-wrap{
+    perspective: 1000px;
+    width: 100%;
+    height: 60vh;
+    position: relative;
+    z-index: 1;
+}
+
+.rev-carousel{
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 1s;
+}
+.reviewcard{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    height: fit-content;
+    width: 700px;
+    max-width: 100%;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    opacity: 1;
+    transition: transform .7s, opacity 1s;
+    pointer-events: none;
+}
+
+.reviewcard.next{
+    opacity: .7;
+}
+
+.reviewcard.next{
+    opacity: .5;
+}
+
+.reviewcard:nth-child(1){
+    transform: rotateY(0deg) translateZ(411px) rotateY(6120deg);
+}
+.reviewcard:nth-child(2){
+    transform: rotateY(120deg) translateZ(411px) rotateY(6000deg);
+}
+.reviewcard:nth-child(3) {
+    transform: rotateY(240deg) translateZ(411px) rotateY(5880deg);
+}
+.reviewinner{
+    box-shadow: 11px 10px 38px 0px rgba(46, 63, 99, 0.15);
+    border-radius: 10px;
+    min-height: 250px;
+    padding: 20px;
+    background-color: #ffffff;
+    pointer-events: auto;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    transform: translate(0);
+    transition: inherit;
+}
+.reviewinner.current{
+    cursor: default;
+}
