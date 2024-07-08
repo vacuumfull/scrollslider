@@ -79,8 +79,10 @@
 
     function moveItems(angle, moveAngle=120){
         let reviewsCarousel = document.querySelector('.rev-carousel'),
-            reviewCards = document.querySelectorAll('.reviewcard');
-        reviewsCarousel.style = `transform: translateZ(-311px) rotateY(-${angle}deg);`
+            reviewCards = document.querySelectorAll('.reviewcard'),
+            angleStroke = angle > 0 ? `-${angle}` : Math.abs(angle)
+
+        reviewsCarousel.style = `transform: translateZ(-311px) rotateY(${angleStroke}deg);`
         reviewCards.forEach((review, idx) => {
             let shiftAngle = idx * moveAngle,
                 setAngle = angle - shiftAngle,
